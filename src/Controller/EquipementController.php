@@ -38,9 +38,11 @@ class EquipementController extends AbstractController
     public function lister(Request $request): Response
     {
         $liste_equipements = $this->repository->findAllOrderedByName();
+        $svgText = "LES ÉQUIPEMENTS";
  
         return $this->render("equipement/lister.html.twig", [
-            'liste_equipements' => $liste_equipements
+            'liste_equipements' => $liste_equipements,
+            'svg_text' => $svgText
         ]);
     }
 

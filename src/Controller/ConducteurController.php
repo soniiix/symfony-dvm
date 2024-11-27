@@ -44,9 +44,11 @@ class ConducteurController extends AbstractController
         // obtenir la liste de tous les conducteurs triés par ordre alphabétique
         // croissant
         $liste_conducteurs = $this->repository->findAllOrderedByName();
+        $svgText = "LES CONDUCTEURS";
        
         return $this->render("conducteur/lister.html.twig", [
-            'liste_conducteurs' => $liste_conducteurs
+            'liste_conducteurs' => $liste_conducteurs,
+            'svg_text' => $svgText
         ]);
     }
 

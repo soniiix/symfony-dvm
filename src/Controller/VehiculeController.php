@@ -38,9 +38,11 @@ class VehiculeController extends AbstractController
     public function lister(Request $request): Response
     {
         $liste_vehicules = $this->repository->findAllOrdered();
+        $svgText = "LES VÉHICULES";
  
         return $this->render("vehicule/lister.html.twig", [
-            'liste_vehicules' => $liste_vehicules
+            'liste_vehicules' => $liste_vehicules,
+            'svg_text' => $svgText
         ]);
     }
 
