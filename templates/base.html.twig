@@ -11,21 +11,6 @@
         {% endblock %}
     </head>
     <body>
-    <nav>
-            <!-- Menu Hamburger -->
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <ul id="menu">
-                <li><a href="/">Accueil</a></li>
-                <li><a href="/conducteur/lister">Conducteurs</a></li>
-                <li><a href="/vehicule/lister">Véhicules</a></li>
-                <li><a href="/equipement/lister">Équipements</a></li>
-                <li><a href="/connexion">Connexion</a></li>
-            </ul>
-        </nav>
         <header>
             <video autoplay loop muted class="background-video">
                 <source src="{{ asset('images/carf.mp4') }}" type="video/mp4">
@@ -43,7 +28,22 @@
             </svg>
             <h1>Département des Véhicules à Moteur</h1>
         </header>
-
+ 
+        <nav>
+            <!-- Menu Hamburger -->
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul id="menu">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/conducteur/lister">Conducteurs</a></li>
+                <li><a href="/vehicule/lister">Véhicules</a></li>
+                <li><a href="/equipement/lister">Équipements</a></li>
+                <li><a href="/connexion">Connexion</a></li>
+            </ul>
+        </nav>
 
         <main>
         {% block main %}
