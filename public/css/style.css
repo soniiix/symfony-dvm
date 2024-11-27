@@ -28,14 +28,47 @@ header {
     justify-content: center;
 }
  
-header h1 {
-    color: white;
-    font-size: 40px;
-}
  
 header img {
     margin-right: 40px;
     height: 150px;
+}
+
+/* SVG */
+
+header svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+
+#animatedText {
+    fill: transparent; 
+    font-size: 65px;
+    font-family: 'Arial', sans-serif;
+    stroke: white; 
+    stroke-width: 1px; 
+    stroke-dasharray: 450 0;
+    text-anchor: middle;
+    animation: dash 5s;
+}
+
+/* Animation de la bordure du texte */
+@keyframes dash {
+    0% {
+        stroke-dasharray: 0 450;
+    }
+    
+    100% {
+        stroke-dasharray: 450 0;
+    }
 }
  
 /* FOOTER */
