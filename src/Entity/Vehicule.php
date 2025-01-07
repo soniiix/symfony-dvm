@@ -42,7 +42,7 @@ class Vehicule
     private Collection $ve_equipement_vehicule;
 
     // relation vers Conducteur : un véhicule possède un seul conducteur
-    #[ORM\ManyToOne(targetEntity: Conducteur::class, inversedBy: "vehicules")]
+    #[ORM\ManyToOne(targetEntity: Conducteur::class)]
     #[ORM\JoinColumn(nullable: false, name: 've_co_id', referencedColumnName: 'co_id')]
     private Conducteur $ve_conducteur;
 

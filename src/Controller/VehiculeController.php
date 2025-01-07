@@ -1,28 +1,28 @@
 <?php
- 
+
 namespace App\Controller;
- 
+
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
 use App\Repository\VehiculeRepository;
 use App\Repository\ConducteurRepository;
- 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
- 
+
 // Utilisation d'un logger pour le débogage
 use Psr\Log\LoggerInterface;
- 
+
 class VehiculeController extends AbstractController
 {
     // Logger
     private $logger;
     private $entity_manager;
     private $repository;
- 
+
     /**
      * Constructeur auquel on passe en paramètre un logger
      */
@@ -39,7 +39,7 @@ class VehiculeController extends AbstractController
     {
         $liste_vehicules = $this->repository->findAllOrdered();
         $svgText = "LES VÉHICULES";
- 
+
         return $this->render("vehicule/lister.html.twig", [
             'liste_vehicules' => $liste_vehicules,
             'svg_text' => $svgText
@@ -50,22 +50,22 @@ class VehiculeController extends AbstractController
      * Supprimer un véhicule étant donné son id
      */
     #[Route('/vehicule/supprimer/{id}', name: 'vehicule_supprimer')]
-    public function supprimer( $id ): Response
+    public function supprimer($id): Response
     {
         // Récupérer le vehicule par son id
         $vehicule = $this->repository->find($id);
- 
+
         if (!$vehicule) {
             throw $this->createNotFoundException('Aucun véhicule avec l\'identifiant ' . $id . ' n\'a été trouvé');
         }
- 
+
         // Suppression du vehicule
         $this->entity_manager->remove($vehicule);
         $this->entity_manager->flush();
- 
+
         return $this->redirectToRoute('vehicule_lister');
     }
- 
+
     /**
      * Supprimer tous les véhicules (debug/test)
      */
@@ -74,13 +74,13 @@ class VehiculeController extends AbstractController
     {
         // Récupérer les vehicules
         $vehicules = $this->repository->findAll();
- 
-        foreach($vehicules as $vehicule) {
+
+        foreach ($vehicules as $vehicule) {
             $this->entity_manager->remove($vehicule);
         }
-       
+
         $this->entity_manager->flush();
- 
+
         return $this->redirectToRoute('vehicule_lister');
     }
 
@@ -92,50 +92,64 @@ class VehiculeController extends AbstractController
     {
         $vehicule = new Vehicule();
         $form = $this->createForm(VehiculeType::class, $vehicule);
- 
+
         $form->handleRequest($request);
- 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repository->save($vehicule, true);
- 
+
             return $this->redirectToRoute('vehicule_lister');
         }
- 
+
         return $this->render('vehicule/ajouter.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-   
+
     /**
      * Modifier un véhicule étant donné son id
      */
     #[Route('/vehicule/modifier/{id}', name: 'vehicule_modifier')]
     public function modifier(Request $request, int $id): Response
     {
- 
+
         $vehicule = $this->repository->find($id);
-       
-       
+
+
         if (!$vehicule) {
             throw $this->createNotFoundException('Aucun véhicule avec l\'identifiant ' . $id . ' n\'a été trouvé');
         }
- 
+
         $form = $this->createForm(VehiculeType::class, $vehicule);
- 
+
         $form->handleRequest($request);
- 
+
         if ($form->isSubmitted() && $form->isValid()) {
-           
+
             $this->repository->save($vehicule, true);
- 
+
             return $this->redirectToRoute('vehicule_lister');
         }
- 
+
         return $this->render('vehicule/modifier.html.twig', [
             'form' => $form->createView(),
         ]);
- 
     }
- 
+
+    /**
+     * Supprimer un véhicule étant donné son id
+     */
+    #[Route('/vehicule/voir/{id}', name: 'vehicule_voir')]
+    public function voir($id): Response
+    {
+        // Récupérer le vehicule par son id
+        $vehicule = $this->repository->find($id);
+
+        // Récupérer les équipements associés
+
+
+        return $this->render('vehicule/voir.html.twig', [
+            'vehicule' => $vehicule
+        ]);
+    }
 }
- 

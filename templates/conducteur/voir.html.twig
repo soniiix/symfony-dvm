@@ -3,49 +3,47 @@
 {% block main %}
     <section>
  
-    <h2>Conducteurs</h2>
+    <h2>Conducteur : {{conducteur.CoNom}}</h2>
+
+
+    <h3 id="title">
+        Liste des véhicules
+    <h3>
+
+    {% if vehicules is empty %}
  
-    <nav>
-        <ul>
-            <li><a href="/conducteur/ajouter">[+] Ajouter</a></li>
-            <li><a href="/conducteur/supprimer_tout">[x] Tout Supprimer</a></li>
-        </ul>
-    </nav>
- 
-    {% if liste_conducteurs is empty %}
- 
-        <p>Aucun conducteur trouvé.</p>
+        <p>Ce conducteur n'a aucun véhicule.</p>
  
     {% else %}
  
     <table class="table">
         <tr>
-           
             <th style="width: 50px">Id</th>
-            <th style="width: 250px">Nom</th>
+            <th style="width: 150px">Marque</th>
+            <th style="width: 150px">Modèle</th>
             <th style="width: 50px">Suppr.</th>
             <th style="width: 50px">Mod.</th>
-            <th style="width: 50px">Voir</th>
- 
+            <th style="width: 50px">Détails</th>
         </tr>
-        {% for e in liste_conducteurs %}
+        {% for v in vehicules %}
             <tr>
                
-                <td class="center"> {{ e.CoId }} </td>
-                <td> {{ e.CoNom }} </td>
- 
+                <td class="center">{{ v.VeId }}</td>
+                <td> {{ v.VeMarque }}</td>
+                <td> {{ v.VeModele }}</td>
+
                 <td class="center">
-                    <a href="/conducteur/supprimer/{{ e.CoId }}">
+                    <a href="/vehicule/supprimer/{{ v.VeId }}">
                         <img src="{{ asset('images/delete.png') }}" alt="delete">
                     </a>
                 </td>
                 <td class="center">
-                    <a href="/conducteur/modifier/{{ e.CoId }}">
+                    <a href="/vehicule/modifier/{{ v.VeId }}">
                         <img src="{{ asset('images/modify.png') }}" alt="modify">
                     </a>
                 </td>
                 <td class="center">
-                    <a href="/conducteur/voir/{{ e.CoId }}">
+                    <a href="/vehicule/voir/{{ v.VeId }}">
                         <img src="{{ asset('images/view.png') }}" alt="see">
                     </a>
                 </td>
@@ -55,6 +53,10 @@
     </table>
  
     {% endif %}
- 
+
+
+
+
+
     </section>
 {% endblock %}
