@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipement;
+use App\Entity\EquipementVehicule;
 use App\Entity\Vehicule;
+use App\Form\EquipementType;
 use App\Form\VehiculeType;
 use App\Repository\VehiculeRepository;
 use App\Repository\ConducteurRepository;
@@ -137,19 +140,63 @@ class VehiculeController extends AbstractController
     }
 
     /**
-     * Supprimer un véhicule étant donné son id
+     * Voir les détails d'un équipement
      */
     #[Route('/vehicule/voir/{id}', name: 'vehicule_voir')]
-    public function voir($id): Response
+    public function voir($id, EntityManagerInterface $entity_manager): Response
     {
         // Récupérer le vehicule par son id
         $vehicule = $this->repository->find($id);
 
-        // Récupérer les équipements associés
-
+        // Récupérer les équipements associés au véhicule
+        $EqVeRepository = $entity_manager->getRepository(EquipementVehicule::class);
+        $equipements_vehicules = $EqVeRepository->findBy([
+            'eqve_vehicule' => $vehicule
+        ]);
+        $equipements = [];
+        foreach ($equipements_vehicules as $eqv) {
+            $equipements[] = $eqv->getEqVeEquipement();
+        }
 
         return $this->render('vehicule/voir.html.twig', [
-            'vehicule' => $vehicule
+            'vehicule' => $vehicule,
+            'equipements' => $equipements
+        ]);
+    }
+
+    /**
+     * Ajouter un équipement pour un véhicule
+     */
+    #[Route('/vehicule/{id}/ajouter_equipement', name: 'vehicule_ajouter_equipement')]
+    public function ajouterEquipement($id, Request $request, EntityManagerInterface $entity_manager): Response
+    {
+        // Récupérer le vehicule par son id
+        $vehicule = $this->repository->find($id);
+
+        $eqVeRepository = $entity_manager->getRepository(EquipementVehicule::class);
+        $equipementRepository = $entity_manager->getRepository(Equipement::class);
+        
+        $equipement = new Equipement();
+        $form = $this->createForm(EquipementType::class, $equipement, ['include_quantite' => true]);
+
+        $form->handleRequest($request);
+ 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $equipementRepository->save($equipement, true);
+
+            $eqVe = new EquipementVehicule();
+            $eqVe->setEqVeVehicule($vehicule);
+            $eqVe->setEqVeEquipement($equipement);
+            //récupérer la quantité saisie dans le formulaire
+            $eqVe->setEqVeQuantite($form->get('quantite')->getData());
+            $eqVeRepository->save($eqVe, true);
+
+            return $this->redirectToRoute('vehicule_voir', ['id' => $vehicule->getVeId()]);
+        }
+ 
+        return $this->render('equipement/ajouter.html.twig', [
+            'form' => $form->createView(),
+            'equipement_vehicule' => true
         ]);
     }
 }

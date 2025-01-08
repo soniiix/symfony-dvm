@@ -7,9 +7,48 @@
 
 
     <h3 id="title">
-        Liste des équipements
+        Liste des équipements &nbsp;
+        <a href="/vehicule/{{ vehicule.VeId }}/ajouter_equipement">[+] Ajouter</a>
     <h3>
+    
 
+    {% if equipements is empty %}
+ 
+        <p>Aucun équipement trouvé.</p>
+ 
+    {% else %}
+ 
+    <table class="table">
+        <tr>
+            <th style="width: 50px">Id</th>
+            <th style="width: 150px">Libellé</th>
+            <th style="width: 150px">Prix</th>
+            <th style="width: 50px">Suppr.</th>
+            <th style="width: 50px">Mod.</th>
+           
+        </tr>
+        {% for e in equipements %}
+            <tr>
+                <td class="center">{{ e.EqId }}</td>
+                <td> {{ e.EqLibelle }}</td>
+                <td> {{ e.EqPrix }} €</td>
+
+                <td class="center">
+                    <a href="/equipement/supprimer/{{ e.EqId }}">
+                        <img src="{{ asset('images/delete.png') }}" alt="delete">
+                    </a>
+                </td>
+                <td class="center">
+                    <a href="/equipement/modifier/{{ e.EqId }}">
+                        <img src="{{ asset('images/modify.png') }}" alt="modify">
+                    </a>
+                </td>
+               
+            </tr>
+        {% endfor %}
+    </table>
+ 
+    {% endif %}
 
     </section>
 {% endblock %}

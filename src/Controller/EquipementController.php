@@ -3,6 +3,7 @@
 namespace App\Controller;
  
 use App\Entity\Equipement;
+use App\Entity\EquipementVehicule;
 use App\Form\EquipementType;
 use App\Repository\EquipementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,7 +66,7 @@ class EquipementController extends AbstractController
         }
  
         return $this->render('equipement/ajouter.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -102,7 +103,7 @@ class EquipementController extends AbstractController
      * Supprimer un équipement étant donné son id
      */
     #[Route('/equipement/supprimer/{id}', name: 'equipement_supprimer')]
-    public function supprimer( $id ): Response
+    public function supprimer(EntityManagerInterface $entity_manager, $id ): Response
     {
         // à partir du Repository, obtenir l'équipement grâce à son identifiant
         $equipement = $this->repository->find($id);
@@ -110,6 +111,16 @@ class EquipementController extends AbstractController
         // dans le cas où l'équipement n'aurait pas été trouvé, générer une exception
         if (!$equipement) {
             throw $this->createNotFoundException('Acucun équipement d\'identifiant ' . $id . ' n\'a été trouvé');
+        }
+
+        // si l'équipement est lié à un véhicule, on supprime la relation
+        $eqVeRepository = $entity_manager->getRepository(EquipementVehicule::class);
+        $equipements_vehicules = $eqVeRepository->findAll();
+
+        foreach($equipements_vehicules as $eqVe){
+            if ($eqVe->getEqVeEquipement() == $equipement){
+                $entity_manager->remove($eqVe, true);
+            }
         }
        
         // Suppression de l'équipement

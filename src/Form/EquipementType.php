@@ -20,12 +20,21 @@ class EquipementType extends AbstractType
                 'label' => 'Prix',
                 'required' => true,
             ]);
+
+        if ($options['include_quantite']){
+            $builder->add('quantite', NumberType::class, [
+                'label' => 'Quantité',
+                'required' => true,
+                'mapped' => false
+            ]);
+        }
     }
  
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Equipement::class
+            'data_class' => Equipement::class,
+            'include_quantite' => false
         ]);
     }
 }

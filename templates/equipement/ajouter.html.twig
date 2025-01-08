@@ -10,6 +10,9 @@
     {{ form_start(form) }}
         {{ form_row(form.eq_libelle) }}
         {{ form_row(form.eq_prix) }}
+        {% if form.quantite is defined %}
+            {{ form_row(form.quantite) }}
+        {% endif %}
         <button type="submit">Ajouter</button>
     {{ form_end(form) }}
  

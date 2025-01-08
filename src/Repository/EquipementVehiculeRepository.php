@@ -20,9 +20,9 @@ class EquipementVehiculeRepository extends ServiceEntityRepository
     }
 
 
-    public function save(Vehicule $vehicule, bool $flush = false): void
+    public function save(EquipementVehicule $equipementVehicule, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($vehicule);
+        $this->getEntityManager()->persist($equipementVehicule);
 
         if ($flush) {
             $this->getEntityManager()->flush();
