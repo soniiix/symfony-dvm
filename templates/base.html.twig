@@ -3,12 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <title>{% block title %}DVM - Menu Hamburger{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <title>{% block title %}DVM{% endblock %}</title>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   </head>
-  <body>
-    <!-- Menu Off-screen -->
-    <div class="off-screen-menu">
+  <body data-barba="wrapper">
+    <div class="loader">
+        <div class="page-transition"></div>
+    </div>
+
+    <div class="cover"></div>
+    <div class="menu">
       <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="/conducteur/lister">Conducteurs</a></li>
@@ -27,7 +34,7 @@
     </nav>
 
     <!-- Contenu principal -->
-    <main>
+    <main data-barba="container" data-barba-namespace="home-section">
       {% block main %}
       <section class="content">
         <header class="header">
@@ -44,18 +51,6 @@
       </section>
       {% endblock %}
     </main>
-
-    {% block javascripts %}
-    <script>
-      const hamMenu = document.querySelector(".ham-menu");
-      const offScreenMenu = document.querySelector(".off-screen-menu");
-
-      // Ajoute ou retire les classes "active" lorsque le menu hamburger est cliqué
-      hamMenu.addEventListener("click", () => {
-        hamMenu.classList.toggle("active");
-        offScreenMenu.classList.toggle("active");
-      });
-    </script>
-    {% endblock %}
+    <script src="{{ asset('js/javascript.js') }}"></script>
   </body>
 </html>
