@@ -42,7 +42,7 @@ body {
 
 .menu ul{
   display:flex;
-  gap: 40vh;
+  gap: 20vh;
   list-style: none;
   font-size: 25px;
   justify-content: center;
@@ -101,7 +101,7 @@ main{
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .menu ul {
     display: none;
     flex-direction: column;
