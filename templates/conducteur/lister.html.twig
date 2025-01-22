@@ -26,9 +26,9 @@
            
             <th style="width: 50px">Id</th>
             <th style="width: 250px">Nom</th>
-            <th style="width: 50px">Suppr.</th>
-            <th style="width: 50px">Mod.</th>
-            <th style="width: 50px">Véhic.</th>
+            <th style="width: 50px">Supprimer</th>
+            <th style="width: 50px">Modifier</th>
+            <th style="width: 50px">Véhicules</th>
  
         </tr>
         {% for e in liste_conducteurs %}
@@ -39,17 +39,17 @@
  
                 <td class="center">
                     <a href="/conducteur/supprimer/{{ e.CoId }}">
-                        <img src="{{ asset('images/delete.png') }}" alt="delete">
+                        <i class="fa-solid fa-trash-can"></i>
                     </a>
                 </td>
                 <td class="center">
                     <a href="/conducteur/modifier/{{ e.CoId }}">
-                        <img src="{{ asset('images/modify.png') }}" alt="modify">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </a>
                 </td>
                 <td class="center">
                     <a href="/conducteur/voir/{{ e.CoId }}">
-                        <img src="{{ asset('images/car_icon.png') }}" alt="see">
+                        <i class="fa-solid fa-car"></i>
                     </a>
                 </td>
                
