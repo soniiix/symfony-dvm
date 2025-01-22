@@ -17,6 +17,9 @@
         <p>Aucun conducteur trouvé.</p>
  
     {% else %}
+
+    <!-- Barre de recherche -->
+    <input type="text" id="searchDriver" placeholder="Rechercher..."></input>
  
     <table class="table">
         <tr>
@@ -29,10 +32,10 @@
  
         </tr>
         {% for e in liste_conducteurs %}
-            <tr>
+            <tr class="driverRow">
                
                 <td class="center"> {{ e.CoId }} </td>
-                <td> {{ e.CoNom }} </td>
+                <td class="driverName"> {{ e.CoNom }} </td>
  
                 <td class="center">
                     <a href="/conducteur/supprimer/{{ e.CoId }}">
