@@ -19,15 +19,23 @@ class VehiculeType extends AbstractType
     {
         $builder
             ->add('ve_marque', TextType::class, [
-                'label' => 'Marque',
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Marque',
+                ),
                 'required' => true,
             ])->add('ve_modele', TextType::class, [
-                'label' => 'Modèle',
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Modèle',
+                ),
                 'required' => true,
             ])->add('ve_conducteur', EntityType::class, [
+                
+                'label' => false,
+                'placeholder' => 'Sélectionner conducteur',
                 'class' => Conducteur::class,
                 'choice_label' => 'CoNom',
-                'label' => 'Conducteur'
             ])->add('ve_date', DateType::class, [
                 'label' => 'Date d\'acquisition',
                 'widget' => 'single_text',
