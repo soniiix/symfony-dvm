@@ -199,14 +199,13 @@ class ConducteurController extends AbstractController
         //récupérer le conducteur en question
         $conducteur = $this->repository->find($id);
 
-
         $vehiculeRepository = $entity_manager->getRepository(Vehicule::class);
 
         $vehicules = $vehiculeRepository->findBy([
             've_conducteur' => $id
         ]);
 
-        $prixEquipements = [];
+        $vehiculesAvecPrixEquipements = [];
         // trouver le prix total des équipements de chaque véhicule
         foreach ($vehicules as $vehicule){
             // Récupérer les équipements associés au véhicule
@@ -214,24 +213,23 @@ class ConducteurController extends AbstractController
             $equipements_vehicules = $EqVeRepository->findBy([
                 'eqve_vehicule' => $vehicule
             ]);
-            $equipements = [];
-            foreach ($equipements_vehicules as $eqv) {
-                $equipements[] = $eqv->getEqVeEquipement();
-            }
-            // ajouter le prix de l'équipement au total pour ce véhicule
+            
             $totalEquipements = 0;
-            foreach($equipements as $equipement){
-                $totalEquipements += $equipement->getEqPrix();
+            foreach ($equipements_vehicules as $eqv) {
+                $totalEquipements += $eqv->getEqVeEquipement()->getEqPrix();
             }
 
-            // ajouter au total pour le véhicule
-            array_push($prixEquipements, $totalEquipements);
+            // Ajouter le véhicule et son total d'équipements dans le tableau
+            $vehiculesAvecPrixEquipements[] = [
+                'vehicule' => $vehicule,
+                'totalEquipements' => $totalEquipements,
+            ];
         }
 
+        dump($vehiculesAvecPrixEquipements);
         return $this->render('conducteur/voir.html.twig', [
             'conducteur' => $conducteur,
-            'vehicules' => $vehicules,
-            'totalEquipements' => $prixEquipements
+            'vehicules' => $vehiculesAvecPrixEquipements,
         ]);
     }
 }

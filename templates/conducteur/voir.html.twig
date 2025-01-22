@@ -29,25 +29,26 @@
         {% for v in vehicules %}
             <tr>
                
-                <td class="center">{{ v.VeId }}</td>
-                <td> {{ v.VeMarque }}</td>
-                <td> {{ v.VeModele }}</td>
+                <td class="center">{{ v.vehicule.VeId }}</td>
+                <td> {{ v.vehicule.VeMarque }}</td>
+                <td> {{ v.vehicule.VeModele }}</td>
 
                 <td class="center">
-                    <a href="/vehicule/supprimer/{{ v.VeId }}">
+                    <a href="/vehicule/supprimer/{{ v.vehicule.VeId }}">
                         <img src="{{ asset('images/delete.png') }}" alt="delete">
                     </a>
                 </td>
                 <td class="center">
-                    <a href="/vehicule/modifier/{{ v.VeId }}">
+                    <a href="/vehicule/modifier/{{ v.vehicule.VeId }}">
                         <img src="{{ asset('images/modify.png') }}" alt="modify">
                     </a>
                 </td>
                 <td class="center">
-                    <a href="/vehicule/voir/{{ v.VeId }}">
+                    <a href="/vehicule/voir/{{ v.vehicule.VeId }}">
                         <img class="eye" src="{{ asset('images/view.png') }}" alt="see" >
                     </a>
                 </td>
+                <td>{{v.totalEquipements}} €</td>
                
             </tr>
         {% endfor %}
