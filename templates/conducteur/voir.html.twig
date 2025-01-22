@@ -24,6 +24,7 @@
             <th style="width: 50px">Suppr.</th>
             <th style="width: 50px">Mod.</th>
             <th style="width: 50px">Détails</th>
+            <th style="width: 50px">Prix total équipements</th>
         </tr>
         {% for v in vehicules %}
             <tr>
@@ -44,7 +45,7 @@
                 </td>
                 <td class="center">
                     <a href="/vehicule/voir/{{ v.VeId }}">
-                        <img src="{{ asset('images/view.png') }}" alt="see">
+                        <img src="{{ asset('images/view.png') }}" style="height:40px" alt="see">
                     </a>
                 </td>
                

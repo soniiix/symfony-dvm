@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Conducteur;
+use App\Entity\EquipementVehicule;
 use App\Entity\Vehicule;
 use App\Form\ConducteurType;
 use App\Repository\ConducteurRepository;
@@ -205,9 +206,32 @@ class ConducteurController extends AbstractController
             've_conducteur' => $id
         ]);
 
+        $prixEquipements = [];
+        // trouver le prix total des équipements de chaque véhicule
+        foreach ($vehicules as $vehicule){
+            // Récupérer les équipements associés au véhicule
+            $EqVeRepository = $entity_manager->getRepository(EquipementVehicule::class);
+            $equipements_vehicules = $EqVeRepository->findBy([
+                'eqve_vehicule' => $vehicule
+            ]);
+            $equipements = [];
+            foreach ($equipements_vehicules as $eqv) {
+                $equipements[] = $eqv->getEqVeEquipement();
+            }
+            // ajouter le prix de l'équipement au total pour ce véhicule
+            $totalEquipements = 0;
+            foreach($equipements as $equipement){
+                $totalEquipements += $equipement->getEqPrix();
+            }
+
+            // ajouter au total pour le véhicule
+            array_push($prixEquipements, $totalEquipements);
+        }
+
         return $this->render('conducteur/voir.html.twig', [
             'conducteur' => $conducteur,
-            'vehicules' => $vehicules
+            'vehicules' => $vehicules,
+            'totalEquipements' => $prixEquipements
         ]);
     }
 }
