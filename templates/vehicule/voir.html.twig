@@ -8,8 +8,11 @@
 
     <h3 id="title">
         Liste des équipements &nbsp;
-        <a href="/vehicule/{{ vehicule.VeId }}/ajouter_equipement">[+] Ajouter</a>
-    <h3>
+    </h3>
+
+    <div class="actionButtons">
+        <a href="/vehicule/{{ vehicule.VeId }}/ajouter_equipement">Ajouter &nbsp;<i class="fa-solid fa-square-plus"></i></a>
+    </div>
     
 
     {% if equipements is empty %}

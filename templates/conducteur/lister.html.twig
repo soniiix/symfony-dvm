@@ -4,13 +4,11 @@
     <section>
  
     <h2>Conducteurs</h2>
- 
-    <nav>
-        <ul>
-            <li><a href="/conducteur/ajouter">[+] Ajouter</a></li>
-            <li><a href="/conducteur/supprimer_tout">[x] Tout Supprimer</a></li>
-        </ul>
-    </nav>
+
+    <div class="actionButtons">
+        <a href="/conducteur/ajouter">Ajouter &nbsp;<i class="fa-solid fa-square-plus"></i></a>
+        <a href="/conducteur/supprimer_tout">Tout Supprimer &nbsp;<i class="fa-solid fa-square-xmark"></i></a>
+    </div>
  
     {% if liste_conducteurs is empty %}
  

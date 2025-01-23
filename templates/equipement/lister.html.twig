@@ -4,13 +4,11 @@
     <section>
  
     <h2>Equipements</h2>
- 
-    <nav>
-        <ul>
-            <li><a href="/equipement/ajouter">[+] Ajouter</a></li>
-            <li><a href="/equipement/supprimer_tout">[x] Tout Supprimer</a></li>
-        </ul>
-    </nav>
+
+    <div class="actionButtons">
+        <a href="/equipement/ajouter">Ajouter &nbsp;<i class="fa-solid fa-square-plus"></i></a>
+        <a href="/equipement/supprimer_tout">Tout Supprimer &nbsp;<i class="fa-solid fa-square-xmark"></i></a>
+    </div>
  
     {% if liste_equipements is empty %}
  
