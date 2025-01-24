@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DVM | Tableau Synthétique{% endblock %}
+
+{% block main %}
+    <section>
+ 
+    <h2>Tableau synthétique</h2>
+ 
+    <table class="table">
+        <tr>
+            <th style="width: 50px">Conducteurs</th>
+            <th style="width: 150px">Véhicules</th>
+            <th style="width: 150px">Prix</th>
+           
+        </tr>
+        {% set total = 0 %}
+        {% for ligne in tableauSynthetique %}
+            <tr>
+                <td>{{ ligne.conducteur.coNom }}</td>
+                <td>
+                    {% if ligne.vehicules is empty %}
+                        -
+                    {% else %}
+                        {% for vehicule in ligne.vehicules %}
+                            <div>{{ vehicule.vehicule.veMarque }} {{vehicule.vehicule.veModele}}</div>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ligne.vehicules is empty %}
+                        -
+                    {% else %}
+                        {% for vehicule in ligne.vehicules %}
+                            {% set total = total + vehicule.prixEquipements %}
+                            <div>{{ vehicule.prixEquipements }} €</div>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td class="tdTotal"><strong>Total : </strong> {{total}} €</td>
+        </tr>
+    </table>
+ 
+    </section>
+{% endblock %}
