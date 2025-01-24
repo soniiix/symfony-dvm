@@ -47,7 +47,7 @@ body {
 .menu ul li a{
   color: white;
   text-decoration:none;
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .menu ul li a:hover{
@@ -229,7 +229,7 @@ form button:hover{
 
 .actionButtons a:hover{
   cursor: pointer;
-  font-weight: bold;
+  background-color: #de0202;
 }
 
 .actionButtons i{
