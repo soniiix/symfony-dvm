@@ -155,7 +155,10 @@ class VehiculeController extends AbstractController
         ]);
         $equipements = [];
         foreach ($equipements_vehicules as $eqv) {
-            $equipements[] = $eqv->getEqVeEquipement();
+            $equipements[] = [
+                'equipement' => $eqv->getEqVeEquipement(),
+                'quantite' => $eqv->getEqVeQuantite()
+            ];
         }
 
         return $this->render('vehicule/voir.html.twig', [
