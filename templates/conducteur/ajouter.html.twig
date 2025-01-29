@@ -4,19 +4,18 @@
 
 {% block main %}
     <section class="form-section">
-        <h2>Ajout d'un Conducteur</h2>
         
         <div class="form-container">
             {{ form_start(form) }}
                 <div class="form-group">
-                    {{ form_label(form.co_nom, 'Nom du conducteur') }}
+                <h2>Ajout d'un Conducteur</h2>
                     {{ form_widget(form.co_nom) }}
                     <div class="form-errors">
                         {{ form_errors(form.co_nom) }}
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit">Mettre à jour</button>
+                <button type="submit" class="btn-submit">Ajouter</button>
             {{ form_end(form) }}
         </div>
     </section>
