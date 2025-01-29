@@ -1,23 +1,19 @@
 {# templates/equipement/modifier.html.twig #}
  
 {% extends 'base.html.twig' %}
- 
-{% block css %}
-    {{ parent() }}
-   
-{% endblock %}
- 
+
 {% block main %}
     <section>
  
     <h2>Modification d'un équipement</h2>
  
     {{ form_start(form) }}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Enregistrer</button>
+        {{ form_row(form.eq_libelle) }}
+        {{ form_row(form.eq_prix) }}
+        {% if form.quantite is defined %}
+            {{ form_row(form.quantite) }}
+        {% endif %}
+        <button type="submit">Ajouter</button>
     {{ form_end(form) }}
-   
  
 {% endblock %}
- 
