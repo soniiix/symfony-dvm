@@ -1,9 +1,9 @@
-const hamMenu = document.querySelector(".ham-menu");
-const menu = document.querySelector(".menu");
-hamMenu.addEventListener("click", () => {
-    menu.classList.toggle("active");
-});
+const navbarToggle = document.querySelector('.navbar-toggle');
+const navbarMenu = document.querySelector('.navbar-menu');
 
+  navbarToggle.addEventListener('click', () => {
+    navbarMenu.classList.toggle('active');
+  });
 
 // Barre de recherche
 let searchInput = document.querySelector("#searchDriver");
