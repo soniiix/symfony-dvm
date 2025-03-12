@@ -14,10 +14,16 @@ class EquipementType extends AbstractType
     {
         $builder
             ->add('eq_libelle', TextType::class, [
-                'label' => 'Libellé',
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Libellé',
+                ),
                 'required' => true,
             ])->add('eq_prix', NumberType::class, [
-                'label' => 'Prix',
+                'attr' => array(
+                    'placeholder' => 'Prix',
+                ),
+                'label' => false,
                 'required' => true,
             ]);
 

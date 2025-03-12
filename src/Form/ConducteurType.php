@@ -21,7 +21,10 @@ class ConducteurType extends AbstractType
         // le conducteur ne contient qu'un champ nom de type string
         $builder
             ->add('co_nom', TextType::class, [
-                'label' => 'Nom',
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Nom du conducteur',
+                ),
                 'required' => true,
             ]);
            
