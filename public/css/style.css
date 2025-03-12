@@ -1,6 +1,9 @@
 body {
   background-image: url(../images/pexels-a2pro-3422964.jpg); 
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   overflow-x: hidden;
